@@ -1,0 +1,151 @@
+<div id="wrapper">
+
+  <% include ../partials/navbar %>
+
+  <div id="page-wrapper">
+    <div class="row">
+      <div class="col-md-8 text-center header">
+      <h2>sportING</h2>
+      <h3>game on.</h3>
+      <h4>Welcome <%= user.name %></h4>
+    </div>
+      <div class="col-md-3 pull-right">
+        <h6> date joined: <%= user.dateJoined %></h6>
+        <h6>Recent Activities</h6>
+      </div>
+
+    </div>
+
+    <!-- <div class="col-md-4" id="profile_pic">profile picture</div> -->
+
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Create a new event</h2>
+<!-- my playground -->
+      <form data-toggle="validator" role="form" action="/event/" method="POST">
+
+        <!-- event name field -->
+        <div class="form-group">
+          <label for="eventName" class="control-label">Event Name</label>
+          <input name="title" type="text" class="form-control" id="eventName" placeholder="name" required>
+        </div>
+
+        <!-- date field -->
+        <div class="form-group">
+          <label for="datetimepicker1" class="control-label">Date</label>
+          <div class='input-group date' id='datetimepicker1'>
+            <input name="datetime" data-format="DD-MMM-YYYY hh:mm a" type='text' class="form-control" required>
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+        </div>
+
+        <!-- minpax field -->
+        <div class="form-group has-feedback">
+          <label for="minPax" class="control-label">Minimum Number of People</label>
+          <input name="minPax" type="number" min=2 class="form-control" id="minPax" placeholder="number please" data-error="Bruh, NUMBER PLEASE" required>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <!-- maxpax field -->
+        <div class="form-group">
+          <label for="maxPax" class="control-label">Maximum Number of People</label>
+          <input name="maxPax" type="number" min=2 class="form-control" id="maxPax" placeholder="number please" data-error="Bruh, NUMBER PLEASE">
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <!--location - for now just let it be a dropdown -->
+        <div class="form-group">
+          <label for="location" class="control-label">Location</label>
+          <select name="location" id="location" class="form-control">
+            <option value="woodlands">woodlands</option>
+            <option value="bukit batok">bukit batok</option>
+            <option value="clementi">clementi</option>
+            <option value="marine parade">clementi</option>
+          </select>
+        </div>
+
+        <!-- description -->
+        <div class="form-group">
+          <label for="description" class="control-label">Brief Description</label>
+          <textarea name="description" type="text" rows="3" class="form-control" id="description" placeholder="description" required></textarea>
+        </div>
+
+        <!-- category -->
+        <div class="form-group">
+          <label for="hashtag" class="control-label">hashtag</label>
+          <input name="category" type="text" rows="3" class="form-control" id="hashtag" placeholder="#ilovesporting" required></input>
+        </div>
+
+        <!-- <div class="form-group has-feedback">
+          <label for="inputTwitter" class="control-label">Twitter</label>
+          <div class="input-group">
+            <span class="input-group-addon">@</span>
+            <input type="text" pattern="^[_A-z0-9]{1,}$" maxlength="15" class="form-control" id="inputTwitter" placeholder="1000hz" required>
+          </div>
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            <div class="help-block with-errors">Hey look, this one has feedback icons!</div>
+          </div> -->
+
+
+      <!-- <div class="form-group">
+      <label for="inputPassword" class="control-label">Password</label>
+      <div class="form-inline row">
+      <div class="form-group col-sm-6">
+        <input type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password" required>
+        <div class="help-block">Minimum of 6 characters</div>
+      </div>
+      <div class="form-group col-sm-6">
+        <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Confirm" required>
+        <div class="help-block with-errors"></div>
+      </div>
+      </div>
+      </div>
+      <div class="form-group">
+      <div class="radio">
+      <label>
+        <input type="radio" name="underwear" required>
+        Boxers
+      </label>
+      </div>
+      <div class="radio">
+      <label>
+        <input type="radio" name="underwear" required>
+        Briefs
+      </label>
+      </div>
+      </div>
+      <div class="form-group">
+      <div class="checkbox">
+      <label>
+        <input type="checkbox" id="terms" data-error="Before you wreck yourself" required>
+        Check yourself
+      </label>
+      <div class="help-block with-errors"></div>
+      </div>
+      </div> -->
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+
+<!-- my playground -->
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $(function () {
+    $('#datetimepicker1').datetimepicker();
+    console.log("running datetime");
+  });
+  // script so maxPax >= minPax
+  $('#maxPax').click(function(){
+    let x = $('#minPax').val();
+    if(x !== null || x!== undefined){
+      $('#maxPax').attr('min',x);
+    }
+  })
+</script>

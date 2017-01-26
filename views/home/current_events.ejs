@@ -1,0 +1,53 @@
+<div id="wrapper">
+
+  <% include ../partials/navbar %>
+
+  <div id="page-wrapper">
+    <div class="row">
+      <div class="col-md-8 text-center header">
+      <h2>sportING</h2>
+      <h3>game on.</h3>
+      <h4>Welcome <%= user.name %></h4>
+    </div>
+      <div class="col-md-3 pull-right">
+        <h6> date joined: <%= user.dateJoined %></h6>
+        <h6>Recent Activities</h6>
+      </div>
+
+    </div>
+
+    <!-- <div class="col-md-4" id="profile_pic">profile picture</div> -->
+
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Your upcoming events</h2>
+      <div class="events">
+        <% for(let x=0; x< events.length; x++){ %>
+          <% if(x%0===0){ %>
+            <div class="row">
+          <% } %>
+
+          <% let event = events[x]; %>
+            <div class="col-md-6 portfolio-item">
+              <a href= <%= "/event/" + event._id %> >
+                <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+              </a>
+
+              <h3>
+                <a href= "#"><%= event.name %></a>
+              </h3>
+
+              <p><%= event.description %></p>
+            </div>
+
+          <% if(x%0===0){ %>
+            </div>
+          <% } %>
+
+        <% } %>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>

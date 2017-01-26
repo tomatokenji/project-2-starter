@@ -1,0 +1,93 @@
+<div id="wrapper">
+
+  <% include ../partials/navbar %>
+
+  <div id="page-wrapper">
+
+    <div class="row">
+      <div class="col-md-8 text-center header">
+      <h2>sportING</h2>
+      <h3>game on.</h3>
+      <h4>Welcome <%= user.name %></h4>
+    </div>
+      <div class="col-md-3 pull-right">
+        <h6> date joined: <%= user.dateJoined %></h6>
+        <h6>Recent Activities</h6>
+      </div>
+
+    </div>
+
+    <!-- <div class="col-md-4" id="profile_pic">profile picture</div> -->
+
+    <div class="col-md-10 col-md-offset-1">
+      <h2><%= event.title %></h2>
+      <h3>Details</h3>
+
+      <div class="row">
+        <div class="col-md-3">Date</div>
+        <% let tempdate = moment(event.datetime).format('DD MMM YYYY') %>
+        <div class="col-md-6"><%= tempdate %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">Time</div>
+        <% let temptime = moment(event.datetime).format('HH:mm:ss A') %>
+        <div class="col-md-6"><%= temptime %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">Location</div>
+        <div class="col-md-6"><%= event.location %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">minimum sportlings</div>
+        <div class="col-md-6"><%= event.minPax %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">maximum sportlings</div>
+        <div class="col-md-6"><%= event.maxPax %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">Current sportlings</div>
+        <div class="col-md-6"><%= people.length%></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-9">
+        <!-- loop through peopleAttending arary - prof pic? -->
+
+          <% for(let i=0; i< people.length; i++){ %>
+            <div class="row-fluid">
+              <div class="col-md-6">Name</div>
+              <div class="col-md-6"><%= people[i].name %></div>
+            </div>
+          <% } %>
+        </div>
+      </div>
+
+
+      <!-- buttons to delete / edit / join -->
+      <div class="row">
+        <form action= <%= "/event/" + event._id + "?_method=DELETE" %> method="POST">
+          <input type="submit" value="delete" class="btn btn-danger btn-space col-md-2"></input>
+        </form>
+
+        <form action= <%="/event/" + event._id + "/edit" %> method="GET">
+          <input type="submit" value="Edit" class="btn btn-primary btn-space col-md-2"></input>
+        </form>
+
+        <form action= <%="/event/" + event._id + "/join" %> method="GET">
+          <input type="submit" value="Join" class="btn btn-primary btn-space col-md-2"></input>
+        </form>
+      </div>
+
+
+
+    </div>
+
+
+  </div>
+</div>

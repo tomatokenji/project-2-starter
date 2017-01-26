@@ -1,0 +1,118 @@
+
+
+$(document).ready(function() {
+  $.fn.editable.defaults.mode = 'inline';
+
+  //url parameter readers
+  var url = $(location).attr('href').split( '/' );
+  var id = url[url.length-2]
+
+  // for the dropdown option for minpax and maxpax
+  let arr = [];
+  for(let i=1; i<100; i++){
+    let obj = {};
+    obj.value = i;
+    obj.text = i;
+    arr.push(obj);
+  }
+
+  //for the category option
+  let catArr = ["#basketball", "#baseball", '#badminton', '#soccer']
+
+  $('#datetime').editable({
+    format: "DD-MMM-YYYY hh:mm a",
+    viewformat: "DD-MMM-YYYY hh:mm a",
+    template: "DD-MMM-YYYY hh:mm a",
+    combodate: {
+      minYear: 2017,
+      maxYear: 2017,
+      minuteStep: 10,
+    },
+    send:"always",
+    url: "/event/" + id + "/edit/",
+    success: function(response, newValue) {
+      console.log(newValue, "newValue");
+      return newValue + " updated";
+    },
+  })
+
+  $('#title, #location, #description').editable({
+    send:"always",
+    url: "/event/" + id + "/edit/",
+    success: function(response, newValue) {
+      console.log(newValue, "newValue");
+      //check the value parameters here, dont let it go through if cannot read doc
+      return newValue + " updated";
+    },
+  });
+
+  $('#minPax, #maxPax').editable({
+    send:"always",
+    url: "/event/" + id + "/edit/",
+    success: function(response, newValue) {
+      console.log(newValue, "newValue");
+      //check the value parameters here, dont let it go through if cannot read doc
+      return newValue + " updated";
+    },
+    source: arr,
+  })
+
+  //
+  // $('#title, #location').editable({
+  //   send:"always",
+  //   url: "/event/" + id + "/edit/",
+  //   success: function(response, newValue) {
+  //     console.log(newValue, "newValue");
+  //     return newValue + " updated";
+  //   },
+  //   display: function(value, response) {
+  //       //render response into element
+  //       $(this).html(response);
+  //   },
+  //     // bootbox.prompt({
+  //     //   size: "small",
+  //     //   title:"confirm your title change to from " + $('#title').text() + " to " + params.value ,
+  //     //   callback: function(result){
+  //     //     console.log($('#title').data('editable'));
+  //     //   }
+  //     // })
+  //   });
+
+  console.log("edit js run");
+
+  $('#category').editable({
+        inputclass:'input-large',
+        select2: {
+            placeholder: 'Select Category',
+            tags: true,
+            multiple: true,
+            data: catArr,
+            tokenSeparators: [",", " "]
+        },
+        send:"always",
+        url: "/event/" + id + "/edit/",
+        success: function(response, newValue) {
+          console.log(newValue, "newValue");
+          //check the value parameters here, dont let it go through if cannot read doc
+          return newValue + " updated";
+        },
+    });
+})
+
+
+
+
+
+  //For bootbox. maybe i can ask what is your password. :)
+//   bootbox.prompt({
+//   size: "small",
+//   inputType:"password",
+//   title: "Please enter your password before making any changes?",
+//   callback: function(result){ /* result = String containing user input if OK clicked or null if Cancel clicked */
+//     if(result == null){
+//
+//     }else{
+//
+//     }
+//   }
+// })

@@ -1,0 +1,85 @@
+<div id="wrapper">
+
+  <% include ../partials/navbar %>
+
+  <div id="page-wrapper">
+    <div class="row">
+      <div class="col-md-8 text-center header">
+      <h2>sportING</h2>
+      <h3>game on.</h3>
+      <h4>Welcome <%= user.name %></h4>
+    </div>
+      <div class="col-md-3 pull-right">
+        <h6> date joined: <%= user.dateJoined %></h6>
+        <h6>Recent Activities</h6>
+      </div>
+
+    </div>
+
+    <!-- <div class="col-md-4" id="profile_pic">profile picture</div> -->
+
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Edit</h2>
+<!-- my playground -->
+<table id="user" class="table table-bordered table-striped" style="clear: both">
+<tbody>
+  <tr>
+      <td width="35%">Title</td>
+      <td width="65%"><a href="#" id="title" data-type="text" data-pk="1" data-title="Enter username"><%= event.title %></a></td>
+  </tr>
+  <tr>
+      <td>Date and Time</td>
+      <% let tempdate = moment(event.datetime).format('DD-MMM-YYYY hh:mm a') %>
+      <td><a href="#" id="datetime" data-type="combodate" data-pk="1" data-url= <%= "/event/" + id + "/edit" %> data-value= <%= tempdate %> data-title="Select date"><%= tempdate %></a></td>
+  </tr>
+  <tr>
+      <td>Location</td>
+      <td><a href="#" id="location" data-type="select" data-pk="1" data-source= "[{value:'woodlands', text:'woodlands'},{value:'clementi', text:'clementi'},{value:'marine parade', text: 'marine parade'}]" data-title="Change Location"><%= event.location %></a></td>
+  </tr>
+  <tr>
+      <td>Minimum People</td>
+      <td><a href="#" id="minPax" data-type="select" data-pk="1" data-value= <%= event.minPax %> data-title="Select min"><%= event.minPax %></a></td>
+  </tr>
+  <tr>
+      <td>Maximum People</td>
+      <td><a href="#" id="maxPax" data-type="select" data-pk="1" data-value= <%= event.maxPax %>  data-title="Select max"><%= event.maxPax %></a></td>
+  </tr>
+  <tr>
+      <td>Price</td>
+      <td><a href="#" id="price" data-type="select" data-pk="1" data-value="" data-title="Select sex"></a><%= event.price %></td>
+  </tr>
+  <tr>
+      <td>Description</td>
+      <td><a href="#" id="description" data-type="textarea" data-pk="1" data-value = <%= event.description %>><%= event.description %></a></td>
+  </tr>
+  <tr>
+      <td>Category</td>
+      <td><a href="#" id="category" data-type="select2" data-pk="1" data-value= <%= event.category %> data-title="Select categories"><%= event.category %></a></td>
+  </tr>
+
+
+</tbody>
+</table>
+
+<!-- my playground -->
+    </div>
+
+  </div>
+</div>
+
+<head>
+  <!-- for the forms -->
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+<script src="/js/moment.js"></script>
+<!-- for the tags -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script>
+<link href="/css/select.css" rel="stylesheet" type="text/css"></link>
+</head>
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+
+
+<script src="/js/buttons/edit.js"></script>
