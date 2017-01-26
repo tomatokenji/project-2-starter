@@ -6,5 +6,5 @@ router.get('/:username',homeController.showHomepage);
 
 router.get('/:username/previous',homeController.showPreviousEvents);
 
-
+router.get('/:username/eventlist',homeController.showListOfEvents);
 module.exports = router;

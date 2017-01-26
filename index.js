@@ -21,7 +21,7 @@ const eventRouter = require('./routers/event_router');
 const passport = require('./config/ppConfig')
 const session = require('express-session')
 
-mongoose.connect('mongodb://localhost/projectSport')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/projectSport')
 
 mongoose.Promise = global.Promise
 
@@ -66,7 +66,7 @@ app.use(isLoggedIn);
 app.use('/home',homeRouter);
 app.use('/event',eventRouter);
 
-app.listen(3000,function(){
+app.listen(process.env.PORT || 3000,function(){
   console.log("3000 connected");
 })
 

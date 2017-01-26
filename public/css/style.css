@@ -4,7 +4,7 @@ html,body{
 }
 
 body{
-  background-color:black;
+  background-color:#dae9ed;
 }
 
 .background{
@@ -22,12 +22,6 @@ h1{
   font-family:'Racing Sans One', cursive;
   font-size:10em;
   color:#ff9e28;
-}
-
-p{
-  font-family:'Trade Winds', cursive;
-  font-size: 3em;
-  color: white;
 }
 
 .full{
@@ -60,10 +54,20 @@ p{
   background-color:red;
 }
 
-#page-wrapper{
-  color:#ff7b00
-}
 
 .btn-space{
   margin-right: 5px;
+}
+
+p{
+  font-family:'Roboto', sans-serif;
+  font-size:1em;
+}
+
+h2{
+  color: #2b7787
+}
+
+label{
+  color: #dd7c0d
 }
