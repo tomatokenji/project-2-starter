@@ -16,7 +16,7 @@ let authController = {
         res.redirect('/#middle')
       }else{
         passport.authenticate('local',{
-          successRedirect:'/homepage/' + req.body.username,
+          successRedirect:'/home/' + req.body.username,
           successFlash:"Account created and logged in"
         })(req,res);
       }
