@@ -78,3 +78,18 @@ label{
 .white{
   color:white;
 }
+
+.fix{
+  position:absolute;
+  top:0;
+  z-index:1;
+}
+
+/*.alert{
+  text-align:center;
+  position:relative;
+  margin:0;
+  top:0;
+  width:100%;
+  z-index:1000;
+}*/

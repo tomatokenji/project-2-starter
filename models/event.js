@@ -34,6 +34,11 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
+  photo:{
+    data: Buffer,
+    type: String,
+  },
   //can potentially be a new object
   category:{
     type: String,
@@ -42,7 +47,8 @@ const eventSchema = new mongoose.Schema({
   peopleAttending:
     [{type: mongoose.Schema.Types.ObjectId, ref:'User', unique: true}],
 
-  organizer:{type: mongoose.Schema.Types.ObjectId, ref:'User'},
+  organizer:
+  [{type: mongoose.Schema.Types.ObjectId, ref:'User'}],
 })
 
 

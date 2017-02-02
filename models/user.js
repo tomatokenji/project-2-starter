@@ -60,11 +60,21 @@ const UserSchema = new mongoose.Schema({
   ,
 
   interests:{
-    type:String,
+    type:[{type:String}]
   },
 
   briefDescription:{
     type:String,
+  },
+
+  chatGroups:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref:'Chat',
+  }],
+
+  profilepic:{
+    data: Buffer,
+    type: String,
   },
 
 })

@@ -11,11 +11,15 @@ const User = require('./models/user')
 const Event = require('./models/event')
 const methodOverride = require('method-override')
 const isLoggedIn = require('./middleware/isLoggedIn')
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
 
 //routers
 const authRouter = require('./routers/auth_router');
 const homeRouter = require('./routers/home_router');
 const eventRouter = require('./routers/event_router');
+const profileRouter = require('./routers/profile_router');
 
 //need consts for the passport
 const passport = require('./config/ppConfig')
@@ -65,28 +69,15 @@ app.get('/',function(req,res){
 app.use(isLoggedIn);
 app.use('/home',homeRouter);
 app.use('/event',eventRouter);
+app.use('/profile',profileRouter);
 
-app.listen(process.env.PORT || 3000,function(){
+io.on('connection', function(socket){
+  console.log("websocket connected");
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  })
+});
+
+server.listen(process.env.PORT || 3000,function(){
   console.log("3000 connected");
 })
-
-//
-// var temp2 = function(event){
-//   event.peopleAttending.push("588488f05672a143f8e56d85");
-//   event.save(function(err){
-//     if(err){return console.log(err)};
-//     console.log(event.peopleAttending);
-//   });
-// };
-//
-// temp(temp2);
-
-// temp(function(event){
-//   var x = new Date();
-//   x.setMonth(5)
-//   event.date = x;
-//   event.save(function(err){
-//       if(err){return console.log(err)};
-//       console.log(event.peopleAttending);
-//     });
-// })

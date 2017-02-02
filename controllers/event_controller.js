@@ -21,7 +21,7 @@ let eventController = {
       category: req.body.category,
       description:req.body.description,
       peopleAttending: [req.user._id],
-      organizer: req.user._id,
+      organizer: [req.user._id],
     },function(err,event){
       if(err){
         console.log(err);
@@ -52,16 +52,41 @@ let eventController = {
   },
 
   getEvent: function(req,res){
-    Event.findById(req.params.id).populate('peopleAttending').exec(function(err,event){
+    Event.findById(req.params.id)
+    .populate('peopleAttending')
+    .populate('_id')
+    .populate({
+      path: 'organizer',
+      populate:{path: '_id'}
+    })
+    .exec(function(err,event){
       if(err){
         console.log(err);
         req.flash("event not found");
         res.redirect("/event/");
       }else{
         console.log(event.peopleAttending)
-        var people = event.peopleAttending;
-        res.render('./event/event_details',{"user":req.user,"event":event,"moment": moment,"people":people});
+        let people = event.peopleAttending;
+        let organizer = false;
+        let joined = true;
 
+        //filter for the organizer see if organizer === user === true
+        for (let i=0; i<event.organizer.length;i++){
+          if(JSON.stringify(event.organizer[i]._id) === JSON.stringify(req.user._id)){
+            organizer = true;
+            break;
+          }
+        }
+
+        //check if user has already joined the event
+        if(req.user.eventsCurrent.indexOf(event._id)===-1){
+          joined = false;
+          console.log("indexofevent",req.user.eventsCurrent.indexOf(event))
+        }
+
+
+        console.log('organizertrue',organizer)
+        res.render('./event/event_details',{"user":req.user,"event":event,"moment": moment,"people":people,"organizer": organizer,"joined":joined});
       }
 
     })
