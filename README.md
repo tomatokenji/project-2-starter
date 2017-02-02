@@ -20,7 +20,7 @@ npm install
 No tests written as of yet
 
 ## Live Version
-Available on heroku [here](http://sporting.heroku-app.com)
+Available on heroku [here](http://sporting.herokuapp.com)
 
 ## Built With
 * [jQuery](http://jquery.com/) - jQuery for example is something you likely used
